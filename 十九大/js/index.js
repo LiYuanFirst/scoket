@@ -2,35 +2,35 @@ var socket;
 var groups = [{
 			name:'组一',
 			userId:'001',
-			sort:1,
+			sort:2,
 			score1:0,
 			score2:0,
 			score3:0
 		},{
 			name:'组二',
 			userId:'002',
-			sort:2,
+			sort:4,
 			score1:0,
 			score2:0,
 			score3:0
 		},{
 			name:'组三',
 			userId:'003',
-			sort:3,
+			sort:8,
 			score1:0,
 			score2:0,
 			score3:0
 		},{
 			name:'组四',
 			userId:'004',
-			sort:4,
+			sort:1,
 			score1:0,
 			score2:0,
 			score3:0
 		},{
 			name:'组五',
 			userId:'005',
-			sort:5,
+			sort:7,
 			score1:0,
 			score2:0,
 			score3:0
@@ -44,21 +44,21 @@ var groups = [{
 		},{
 			name:'组七',
 			userId:'007',
-			sort:7,
+			sort:5,
 			score1:0,
 			score2:0,
 			score3:0
 		},{
 			name:'组八',
 			userId:'008',
-			sort:8,
+			sort:3,
 			score1:0,
 			score2:10,
 			score3:0
 		}];
 var scoreList = [{
 				score:10,
-				actived:true
+				actived:false
 			},{
 				score:10,
 				actived:false
@@ -104,40 +104,40 @@ var typeList1 = [
 		id:'002',
 		type:'01',
 		question:'《党章》规定，党员的党龄，从( )之日算起。',
-		options:['A.递交入党申请书','B.递交入党志愿书 ','C.支部大会通过其为预备党员','D.预备期满转为正式党员'],
+		options:['A、递交入党申请书','B、递交入党志愿书 ','C、支部大会通过其为预备党员','D、预备期满转为正式党员'],
 		key:[3]
 	},{
 		id:'003',
 		type:'01',
 		question:'十九大报告指出，建设______是中华民族伟大复兴的基础工程',
-		options:['A.经济强国 ','B.政治强国  ',' C.教育强国 ','D.文化强国'],
+		options:['A、经济强国 ','B、政治强国  ',' C、教育强国 ','D、文化强国'],
 		key:[2]
 	},{
 		id:'004',
 		type:'01',
 		question:'十九大报告指出，我国经济已由______阶段转向______阶段，正处在转变发展方式、优化经济结构、转换增长动力的攻关期，建设现代化经济体系是跨越关口的迫切要求和我国发展的战略目标。',
-		options:['A.高速增长 高水平发展 ','B.高速发展 高水平发展','C.高速增长 高质量发展','D.高速发展 高质量发展'],
+		options:['A、高速增长 高水平发展 ','B、高速发展 高水平发展','C、高速增长 高质量发展','D、高速发展 高质量发展'],
 		key:[2]
 	},{
 		id:'005',
 		type:'02',
 		question:'十九大报告指出，科学立法、严格执法、公正司法、全民守法深入推进，______建设相互促进，中国特色社会主义法治体系日益完善，全社会法治观念明显增强。',
-		options:['A.法治生活','B.法治国家 ','C.法治政府','D.法治社会'],
+		options:['A、法治生活','B、法治国家 ','C、法治政府','D、法治社会'],
 		key:[1,2,3]
 	},{
 		id:'006',
 		type:'02',
 		question:'十九大报告指出，出台中央八项规定，严厉整治_____，坚决反对特权。',
-		options:['A.形式主义','B.官僚主义  ','C.享乐主义','D.奢靡之风','E.个人主义'],
+		options:['A、形式主义','B、官僚主义  ','C、享乐主义','D、奢靡之风','E、个人主义'],
 		key:[0,1,2,3]
 	},{
 		id:'007',
 		question:'十九大报告指出，这个新时代，是____。',
-		options:['A.承前启后、继往开来、在新的历史条件下继续夺取中国特色社会主义伟大胜利的时代 ',
-			'B.决胜全面建成小康社会、进而全面建设社会主义现代化强国的时代',
-			'C.全国各族人民团结奋斗、不断创造美好生活、逐步实现全体人民共同富裕的时代',
-			'D.全体中华儿女勠力同心、奋力实现中华民族伟大复兴中国梦的时代',
-			'E.我国日益走近世界舞台中央、不断为人类作出更大贡献的时代'],
+		options:['A、承前启后、继往开来、在新的历史条件下继续夺取中国特色社会主义伟大胜利的时代 ',
+			'B、决胜全面建成小康社会、进而全面建设社会主义现代化强国的时代',
+			'C、全国各族人民团结奋斗、不断创造美好生活、逐步实现全体人民共同富裕的时代',
+			'D、全体中华儿女勠力同心、奋力实现中华民族伟大复兴中国梦的时代',
+			'E、我国日益走近世界舞台中央、不断为人类作出更大贡献的时代'],
 		key:[0,1,2,3,4]
 	}
 ];
@@ -146,7 +146,7 @@ var typeList3 = [
 		id:'001',
 		type:'01',
 		question:'《党章》规定，党员如果没有正当理由，连续( )不参加党的组织生活，或不交纳党费，或不做党所分配的工作，就被认为是自行脱党。',
-		options:['A.3个月','B.6个月','C.12个月','D.24个月'],
+		options:['A、3个月','B、6个月','C、12个月','D、24个月'],
 		key:[1],
 		explain:'《党章》第一章 第九条规定，党员如果没有正当理由，连续6个月不参加党的组织生活，或不交纳党费，或不做党所分配的工作，就被认为是自行脱党。'
 	},{
@@ -167,38 +167,38 @@ var typeList3 = [
 		id:'004',
 		type:'01',
 		question:'“三会一课”制度的内容是( )。',
-		options:['A.支部党员大会，党支部委员会，党小组会，党课 ','B.支部党员大会，全体人员会，领导班子会，党课','C.民主生活会，党支部委员会，党小组会，党课','D.支部党员大会，党支部委员会，组织生活会，党课'],
+		options:['A、支部党员大会，党支部委员会，党小组会，党课 ','B、支部党员大会，全体人员会，领导班子会，党课','C、民主生活会，党支部委员会，党小组会，党课','D、支部党员大会，党支部委员会，组织生活会，党课'],
 		key:[0],
 		explain:'《关于新形势下党内政治生活的若干准则》提出“坚持‘三会一课’制度。党员必须参加党员大会、党小组会和上党课，党支部要定期召开支部委员会会议。”'
 	},{
 		id:'005',
 		type:'02',
 		question:'实施乡村振兴战略。______问题是关系国计民生的根本性问题，必须始终把解决好“三农”问题作为全党工作重中之重。',
-		options:['A.农业','B.农村 ','C.农民',' D.农田'],
+		options:['A、农业','B、农村 ','C、农民',' D、农田'],
 		key:[0,1,2],
 		explain:'第五章节，第五段中指出，（三）实施乡村振兴战略。农业农村农民问题是关系国计民生的根本性问题，必须始终把解决好“三农”问题作为全党工作重中之重。'
 	},{
 		id:'006',
 		type:'02',
 		question:'全党同志一定要永远与人民__________永远把人民对美好生活的向往作为奋斗目标，以永不懈怠的精神状态和一往无前的奋斗姿态，继续朝着实现中华民族伟大复兴的宏伟目标奋勇前进。',
-		options:['A、同呼吸','B.共命运','C.手牵手','D.心连心'],
+		options:['A、同呼吸','B、共命运','C、手牵手','D、心连心'],
 		key:[0,1,3],
 		explain:'序言，第三段中指出，全党同志一定要永远与人民同呼吸、共命运、心连心，永远把人民对美好生活的向往作为奋斗目标，以永不懈怠的精神状态和一往无前的奋斗姿态，继续朝着实现中华民族伟大复兴的宏伟目标奋勇前进。'
 	},{
 		id:'007',
 		type:'02',
 		question:'_____和_____，是中国共产党人的精神支柱和政治灵魂，也是保持党的团结统一的思想基础。',
-		options:['A.共产主义远大理想',
-			'B.中国特色社会主义共同理想',
-			'C.新时代中国特色社会主义共同理想',
-			'D.共产主义崇高理想'],
+		options:['A、共产主义远大理想',
+			'B、中国特色社会主义共同理想',
+			'C、新时代中国特色社会主义共同理想',
+			'D、共产主义崇高理想'],
 		key:[0,1],
 		explain:'第十三章节，第五段中指出，共产主义远大理想和中国特色社会主义共同理想，是中国共产党人的精神支柱和政治灵魂，也是保持党的团结统一的思想基础。'
 	},{
 		id:'008',
 		type:'02',
 		question:'加强社会保障体系建设。坚持房子是用来住的、不是用来炒的定位，加快建立______的住房制度，让全体人民住有所居。',
-		options:['A.多主体供给 ',' B.多渠道保障 ','C.租购并举 ','D.多部门监管'],
+		options:['A、多主体供给 ',' B、多渠道保障 ','C、租购并举 ','D、多部门监管'],
 		key:[0,1,2],
 		explain:'第八章节，第五段中指出，（三）加强社会保障体系建设。坚持房子是用来住的、不是用来炒的定位，加快建立多主体供给、多渠道保障、租购并举的住房制度，让全体人民住有所居。'
 	},{
@@ -226,13 +226,15 @@ var typeList3 = [
 		explain:'第十三章节，第二段中指出，全党要清醒认识到，我们党面临的执政环境是复杂的，影响党的先进性、弱化党的纯洁性的因素也是复杂的，党内存在的思想不纯、组织不纯、作风不纯等突出问题尚未得到根本解决。'
 	}
 ];
-var tim;
+var tim,tim2;
+var countTime2 = 0;
 new Vue({
 	el: '#app',
 	data: {
 		showpage:'page1',//显示页面
 		progress2: 0,//圆环进度
 		countTime:30,//倒计时
+		countTime2:0,//答题用时
 		itemcode:0,//当前题号
 		ruleNum:0,
 		ruleList:[{
@@ -321,38 +323,112 @@ new Vue({
 					console.log(data)
 					let answerType = data.answerType
 					let msgType = data.msgType
-					switch(answerType){
-						case '必答题':
-							switch (msgType){
-								case '显示规则':
-									that.ruleNum = '0'
-									that.showpage = 'page3'
-									break;
-								case '显示题目':
-									that.showWait = false
-									that.showAnswer = false
-									that.itemcode = data.question
-									that.showpage = 'page4'
-									that.next()
-									break;
-								case '显示答案':
-									//that.answerList = data.content
-									let arr = []
-									data.content.forEach((item,i) => {
-										if(item){
-											arr.push(item)
-											arr[i].name = that.groups[item.index].name
+					if(msgType == '显示排名'){
+						let groupsList = groups
+						that.showpage = 'page5'
+						setTimeout(() => {
+							data.content.forEach((item,i) => {
+								that.groups[i].score1 = item.score1
+								that.groups[i].score2 = item.score2
+								that.groups[i].score3 = item.score3
+								that.groups[i].totalScore = item.totalScore
+								that.groups[i].sort = item.sort + 1
+							})
+						},1000)
+						
+					}else if (msgType == '返回提交数据'){
+						that.$dialog.loading.close();
+		                that.showWait= true;
+		                that.$dialog.notify({
+		                    mes: '提交成功，等待答题结果显示',
+		                    callback: () => {
+		                       that.showAnswer = true
+		                    }
+		                });
+					}else{
+						switch(answerType){
+							case '必答题':
+								switch (msgType){
+									case '显示规则':
+										that.ruleNum = '0'
+										that.showpage = 'page3'
+										break;
+									case '显示题目':
+										
+										that.showWait = false
+										that.showAnswer = false
+										that.itemcode = data.question
+										if(data.question>0){
+											that.typeList = typeList1[that.itemcode-1]
 										}
-									})
-									that.answerList = arr
-									that.showWait = true
-									that.showAnswer = true
-									
-									break;
-								default:
-									break;
-							}
+										that.showpage = 'page4'
+										that.next()
+										break;
+									case '显示答案':
+										//that.answerList = data.content
+										let arr = []
+										data.content.forEach((item,i) => {
+											if(item){
+												arr.push(item)
+												arr[i].name = that.groups[item.index].name
+											}
+										})
+										that.answerList = arr
+										that.showWait = true
+										that.showAnswer = true
+										break;
+									default:
+										break;
+								}
+								break;	
+							case '抢答题':
+								switch (msgType){
+									case '显示规则':
+										that.showAnswer = false
+										that.ruleNum = '1'
+										that.showpage = 'page3'
+										break;
+									case '显示题目':
+										that.showAnswer = false
+										that.itemcode = data.question + 1
+										that.showpage = 'page6'
+										break;
+									case '显示答案':
+										that.showAnswer = true
+										break;
+								}
+								break;	
+							case '风险题':
+								switch (msgType){
+									case '显示规则':
+										that.showAnswer = false
+										that.ruleNum = '2'
+										that.showpage = 'page3'
+										break;
+									case '选择分值':
+										that.showAnswer = false
+										that.scoreList = data.content
+										that.showpage = 'page7'
+										break;
+									case '显示题目':
+										that.showAnswer = false
+										that.itemcode = data.question
+										that.scoreChecked = data.question
+										setTimeout(() => {
+											that.typeList = typeList3[that.itemcode]
+											that.showpage = 'page8'
+										},1200)
+										
+										break;
+									case '显示答案':
+										that.showAnswer = true
+										break;
+								}
+							default:
+								break;
+						}
 					}
+					
 				}
 			}
 		},
@@ -390,46 +466,58 @@ new Vue({
 	            	}
 	            });
 			}else{
+				
 				this.uploadAnswer()
 			}
 		},
 		//上传答案
 		uploadAnswer(){
+			clearInterval(tim)
+			clearInterval(tim2)
 			this.$dialog.loading.open('提交中');
-//			var content = {
-//      			"msgType":"提交数据",
-//      			"answerType":"必答题",
-//      			"question":"",
-//      			"content":{
-//      				id:'001',
-//						index:0,
-//						checklist:[0,1,2],
-//						score:10,
-//						time:10000
-//      			}
-//      	};
-//			
-//			socket.send(JSON.stringify(content));
-//			
-            setTimeout(() => {
-                this.$dialog.loading.close();
-                this.showWait= true;
-                this.$dialog.notify({
-                    mes: '提交成功，等待答题结果显示',
-                    callback: () => {
-                       this.showAnswer = true
-                    }
-                });
-            }, 1000);
+			var request = {
+        		"msgType":"提交数据",
+        		"answerType":"必答题",
+        		"question":this.itemcode,
+        		"content":{
+        			id:localStorage.groupNum,
+					index:this.itemcode,
+					checklist:this.optionchecked.sort(),
+					score:10,
+					time:countTime2
+        		}
+        	};
+			if(this.itemcode === 0){
+				let trueRes = ['十六大主题','十七大主题','十八大主题','十九大主题']
+				if(this.quesSpe.toString() === trueRes.toString()){
+					request.content.score = 10
+				}else{
+					request.content.score = 0
+				}
+			}else{
+				if(this.typeList.key.sort().toString() === this.optionchecked.sort().toString()){
+					request.content.score = 10
+				}else{
+					request.content.score = 0
+				}
+			}
+			console.log(request)
+			socket.send(JSON.stringify(request));
+			
 		},
 		//开始下一题（必答题）
 		next(){
-			this.countTime = 30
+			clearInterval(tim)
+			clearInterval(tim2)
+			this.countTime = 29
+			this.optionchecked = []
+			countTime2 = 0
 			this.progress2 = 0
 			let s= 0
 			tim = setInterval(()=>{
 				if(this.countTime <= 1) {
 					clearInterval(tim)
+					clearInterval(tim2)
 					this.uploadAnswer()
 					return
 				}
@@ -440,7 +528,11 @@ new Vue({
 					this.countTime --
 				},1000)
 			},1000)
+			tim2 = setInterval(() => {
+				countTime2+=100
+			},100)
 		},
+		
 		//选择连线题主题内容
 		choseTopic(i){
 			if(this.quesSpe[i]==''){
@@ -468,11 +560,23 @@ new Vue({
 			}
 		},
 		submitQuesSpe(){
+			
 			console.log(this.quesSpe)
+			if(this.quesSpe.indexOf('') > -1){
+				this.$dialog.toast({
+		            mes: '答案尚未填写完全',
+		            timeout: 1000,
+		            icon: 'error',
+		            callback: () => {
+		            }
+		        });
+			}else{
+				this.uploadAnswer()
+			}
 		}
 	},
 	mounted() {
-		this.typeList = typeList3[this.itemcode]
+		
 		//this.next()
 	}
 })

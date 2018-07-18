@@ -180,7 +180,7 @@
 			</div>
 			<!--必答题 --end-->
 			<!--排行榜-->
-			<div class="page page5" v-show="showpage=='page5'">
+			<div class="page page5" style="overflow: hidden;" v-show="showpage=='page5'">
 				<div class="rgb"></div>
 				<div class="page-logo">
 					<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/logos.png"/>
@@ -287,7 +287,7 @@
 						<div class="">
 							5、请说出这段话最早出自哪里
 						</div>
-						<div class="video" v-show="!showAnswer">
+						<div class="video" style="background: transparent;" v-show="!showAnswer">
 							<audio src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/audio1.mp3" controls="controls"></audio>
 						</div>
 					</div>
