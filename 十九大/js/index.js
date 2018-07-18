@@ -230,13 +230,20 @@ var tim;
 new Vue({
 	el: '#app',
 	data: {
-		showpage:'page7',//显示页面
+		showpage:'page1',//显示页面
 		progress2: 0,//圆环进度
 		countTime:30,//倒计时
-		itemcode:1,//当前题号
+		itemcode:0,//当前题号
+		ruleNum:0,
 		ruleList:[{
-			src:'',
-			text:''
+			src:'http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/font_02.png',
+			text:'必答题活动规则'
+		},{
+			src:'http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/font_03.png',
+			text:'抢答题活动规则'
+		},{
+			src:'http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/font_04.png',
+			text:'风险题活动规则'
 		}],//规则列表
 		//当前题目信息
 		typeList:{
@@ -266,48 +273,14 @@ new Vue({
 		showSelect:false,//显示连线题选项
 		optionchecked:[],//选中选项
 		showWait:false,//显示mask
-		showAnswer:true,//显示答案
+		showAnswer:false,//显示答案
 		groupCheckedName:'',//选择组别
 		groups:groups,//组别
 		scoreList:scoreList,//风险题分值列表
 		scoreChecked:null,
 		letterList:['A','B','C','D','E','F'],//字母数字对应表
 		//必答题显示答案
-		answerList:[
-			{
-				name:'组一',
-				checked:[0,1,2],
-				score:0
-			},{
-				name:'组二',
-				checked:[0,1,2],
-				score:10
-			},{
-				name:'组三',
-				checked:[0,1,2],
-				score:0
-			},{
-				name:'组四',
-				checked:[0,1,2],
-				score:0
-			},{
-				name:'组五',
-				checked:[0,1,2],
-				score:0
-			},{
-				name:'组六',
-				checked:[0,1,2],
-				score:0
-			},{
-				name:'组七',
-				checked:[0,1,2],
-				score:0
-			},{
-				name:'组八',
-				checked:[0,1,2],
-				score:0
-			}
-		]
+		answerList:[]
 	},
 	methods: {
 		//选择组别
@@ -337,13 +310,49 @@ new Vue({
 	        	//打开事件
 				socket.onopen = function() {
 					that.$dialog.loading.close();
-					//that.showpage = 'page2'
-					that.showpage = 'page4'
-					that.itemcode = 1
+					that.showpage = 'page2'
+//					that.showpage = 'page4'
+//					that.itemcode = 1
 				};	
 				//获得消息事件
 				socket.onmessage = function(msg) {
 					console.log(msg)
+					let data = JSON.parse(msg.data)
+					console.log(data)
+					let answerType = data.answerType
+					let msgType = data.msgType
+					switch(answerType){
+						case '必答题':
+							switch (msgType){
+								case '显示规则':
+									that.ruleNum = '0'
+									that.showpage = 'page3'
+									break;
+								case '显示题目':
+									that.showWait = false
+									that.showAnswer = false
+									that.itemcode = data.question
+									that.showpage = 'page4'
+									that.next()
+									break;
+								case '显示答案':
+									//that.answerList = data.content
+									let arr = []
+									data.content.forEach((item,i) => {
+										if(item){
+											arr.push(item)
+											arr[i].name = that.groups[item.index].name
+										}
+									})
+									that.answerList = arr
+									that.showWait = true
+									that.showAnswer = true
+									
+									break;
+								default:
+									break;
+							}
+					}
 				}
 			}
 		},
@@ -387,21 +396,21 @@ new Vue({
 		//上传答案
 		uploadAnswer(){
 			this.$dialog.loading.open('提交中');
-			var content = {
-        			"msgType":"提交数据",
-        			"answerType":"必答题",
-        			"question":"",
-        			"content":{
-        				id:'001',
-						index:0,
-						checklist:[0,1,2],
-						score:10,
-						time:10000
-        			}
-        	};
-			
-			socket.send(JSON.stringify(content));
-			
+//			var content = {
+//      			"msgType":"提交数据",
+//      			"answerType":"必答题",
+//      			"question":"",
+//      			"content":{
+//      				id:'001',
+//						index:0,
+//						checklist:[0,1,2],
+//						score:10,
+//						time:10000
+//      			}
+//      	};
+//			
+//			socket.send(JSON.stringify(content));
+//			
             setTimeout(() => {
                 this.$dialog.loading.close();
                 this.showWait= true;

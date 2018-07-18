@@ -56,11 +56,11 @@
 					<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/logos.png"/>
 				</div>
 				<div class="page-title">
-					<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/font_02.png"/>
+					<img :src="ruleList[ruleNum].src"/>
 				</div>
 				<div class="container">
 					<div class="text">
-						我是活动规则我是活动规则我是活动规则我是活动规则我是活动规则我是活动规则我是活动规则我是活动规则我是活动规则
+						{{ruleList[ruleNum].text}}
 					</div>
 				</div>
 			</div>
