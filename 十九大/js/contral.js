@@ -1,0 +1,303 @@
+var list1 = [{
+    		id:'001',
+    		text:'第一题',
+    		disabled:false
+    	},{
+    		id:'002',
+    		text:'第二题',
+    		disabled:false
+    	},{
+    		id:'003',
+    		text:'第三题',
+    		disabled:false
+    	},{
+    		id:'004',
+    		text:'第四题',
+    		disabled:false
+    	},{
+    		id:'005',
+    		text:'第五题',
+    		disabled:false
+    	},{
+    		id:'006',
+    		text:'第六题',
+    		disabled:false
+    	},{
+    		id:'007',
+    		text:'第七题',
+    		disabled:false
+    	},{
+    		id:'008',
+    		text:'第八题',
+    		disabled:false
+    	}];
+var list2 = [{
+    		id:'001',
+    		text:'第一题',
+    		disabled:false
+    	},{
+    		id:'002',
+    		text:'第二题',
+    		disabled:false
+    	},{
+    		id:'003',
+    		text:'第三题',
+    		disabled:false
+    	},{
+    		id:'004',
+    		text:'第四题',
+    		disabled:false
+    	},{
+    		id:'005',
+    		text:'第五题',
+    		disabled:false
+    	},{
+    		id:'006',
+    		text:'第六题',
+    		disabled:false
+    	},{
+    		id:'007',
+    		text:'第七题',
+    		disabled:false
+    	},{
+    		id:'008',
+    		text:'第八题',
+    		disabled:false
+    	}];
+var list3 = [{
+    		id:'001',
+    		text:'10-1',
+    		disabled:false
+    	},{
+    		id:'002',
+    		text:'10-2',
+    		disabled:false
+    	},{
+    		id:'003',
+    		text:'10-3',
+    		disabled:false
+    	},{
+    		id:'004',
+    		text:'10-4',
+    		disabled:false
+    	},{
+    		id:'005',
+    		text:'20-1',
+    		disabled:false
+    	},{
+    		id:'006',
+    		text:'20-2',
+    		disabled:false
+    	},{
+    		id:'007',
+    		text:'20-3',
+    		disabled:false
+    	},{
+    		id:'008',
+    		text:'20-4',
+    		disabled:false
+    	},{
+    		id:'009',
+    		text:'40-1',
+    		disabled:false
+    	},{
+    		id:'010',
+    		text:'40-2',
+    		disabled:false
+    	},{
+    		id:'011',
+    		text:'40-3',
+    		disabled:false
+    	},{
+    		id:'012',
+    		text:'40-4',
+    		disabled:false
+    	}];
+var socket;
+var compare = function (prop) {
+    return function (obj1, obj2) {
+        var val1 = obj1[prop];
+        var val2 = obj2[prop];if (val1 < val2) {
+            return -1;
+        } else if (val1 > val2) {
+            return 1;
+        } else {
+            return 0;
+        }            
+    } 
+}
+new Vue({
+    el: '#app',
+    data: {
+    	activeName: '1',
+    	list1:list1,
+    	list2:list2,
+    	list3:list3,
+    	loading:false,
+    	tableData: [{
+	        name: '组一',
+	        score1: 0,
+	        score2: 0,
+	        score3: 0
+        },{
+	        name: '组二',
+	        score1: 0,
+	        score2: 0,
+	        score3: 0
+        },{
+	        name: '组三',
+	        score1: 0,
+	        score1: 0,
+	        score2: 0,
+	        score3: 0
+        },{
+	        name: '组四',
+	        score1: 0,
+	        score2: 0,
+	        score3: 0
+        },{
+	        name: '组五',
+	        score1: 0,
+	        score2: 0,
+	        score3: 0
+        },{
+	        name: '组六',
+	        score1: 0,
+	        score2: 0,
+	        score3: 0
+        },{
+	        name: '组七',
+	        score1: 0,
+	        score2: 0,
+	        score3: 0
+        },{
+	        name: '组八',
+	        score1: 0,
+	        score2: 0,
+	        score3: 0
+        }]
+     
+    	
+    },
+    methods: {
+        
+        operation:function(type,desc,index){
+        	if(type=='必答题'){
+        		if(index<=14){
+        			this.list1[index].disabled=true
+        		}
+        	}
+        	
+        	var jsonToSub = {
+        		"msgType":desc,
+        		"answerType":type,
+        		"question":index,
+        		"content":{}
+        	};
+        	socket.send(JSON.stringify(jsonToSub));
+        },
+        postData:function(type,desc){
+        	var tableData = this.tableData;
+			var arr = [{
+				type: type,
+				totalScore: 0,
+				group: '001'
+			}, {
+				type: type,
+				totalScore: 0,
+				group: '002'
+			}, {
+				type: type,
+				totalScore: 0,
+				group: '003'
+			}, {
+				type: type,
+				totalScore: 0,
+				group: '004'
+			}, {
+				type: type,
+				totalScore: 0,
+				group: '005'
+			}, {
+				type: type,
+				totalScore: 0,
+				group: '006'
+			}, {
+				type: type,
+				totalScore: 0,
+				group: '007'
+			}, {
+				type: type,
+				totalScore: 0,
+				group: '008'
+			}];
+			
+			for(var i = 0; i < tableData.length; i++) {
+				arr[i].totalScore = tableData[i].score3;
+			}
+			var jsonToSub = {
+				"msgType": desc,
+				"answerType": type,
+				"question": "",
+				"content": arr
+			};
+			socket.send(JSON.stringify(jsonToSub));
+        }
+    },
+    mounted:function(){
+    	var that = this;
+      	socket = new WebSocket("ws://118.25.2.174/SNGF.WXSuite/websocket/echoAnnotation/000");
+    	//打开事件
+		socket.onopen = function() {
+			//alert("Socket 已打开");
+			//socket.send("这是来自客户端的消息" + location.href + new Date());
+		};
+		//获得消息事件
+		socket.onmessage = function(msg) {
+			var data = JSON.parse(msg.data)
+			console.log(data);
+			if(data.answerType=="必答题"&&data.msgType=="显示排名"){
+				var arr = data.content.sort(compare("group"))
+				console.log(arr);
+				for(var i = 0;i<arr.length;i++){
+					that.tableData[i].score1 = arr[i].totalScore
+				}
+			}
+			
+		};
+		//关闭事件
+		socket.onclose = function() {
+			alert("Socket已关闭");
+		};
+		//发生了错误事件
+		socket.onerror = function() {
+			alert("发生了错误");
+		}
+    },
+    computed: {
+    	scoreAll () {
+    		var arr = this.tableData;
+    		var scoreList = []
+    		arr.forEach((value) => {
+    			var score1 = value.score1==''?0: parseInt(value.score1),
+    				score2 = value.score2==''?0: parseInt(value.score2),
+    				score3 = value.score3==''?0: parseInt(value.score3);
+    			if(score1==''){
+    				score1=0
+    			}
+	            scoreList.push(score1 + score2 + score3)
+	        })
+    		return scoreList
+    		
+    	}
+    },
+    watch:{
+    	tableData(){
+    		var arr = this.tableData;
+    		arr.forEach((value) => {
+	            value.scoreAll = parseInt(value.score1) + parseInt(value.score2) + parseInt(value.score3)
+	        })
+    		console.log(arr)
+    	}
+    }
+})

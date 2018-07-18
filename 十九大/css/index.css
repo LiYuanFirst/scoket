@@ -1,0 +1,420 @@
+#app{
+	position: relative;
+	min-height: 100%;
+}
+[v-cloak] {
+ display: none;
+}
+.bg{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #B80A16;
+	font-size: 0;
+}
+.bg .top{
+	width: 100%;
+}
+.bg .bot{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
+.yd-progressbar-content{
+	color: #fff;
+	font-size: .4rem;
+}
+.button{
+	width: 4.58rem;
+	height: 1.79rem;
+	display: block;
+	margin: 1rem auto;
+	background: url(http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/btn_01.png) center center no-repeat;
+    background-size: contain;
+    transition: .2s;
+}
+.button:active{
+	transform: scale(.96,.96);
+}
+.page{
+	position: relative;
+	/*top: 0;
+	left: 0;
+	width: 100%;*/
+}
+.page-logo{
+	font-size: 0;
+	padding: .2rem;
+}
+.page-logo img{
+	width: 8.1rem;
+}
+.page-title{
+	text-align: center;
+	font-size: 0;
+}
+.page1{
+	overflow: hidden;
+}
+.page1 .page-title img{
+	width: 5.62rem;
+}
+.page1 .container{
+	width: 18rem;
+	margin: 2rem auto;
+	font-size: 0;
+	overflow: hidden;
+}
+.page1 .container .wrapper{
+	display: inline-block;
+	width: 4rem;
+	height: 4rem;
+	background: url(http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/click_01.png) center center no-repeat;
+    background-size: contain;
+    line-height: 4rem;
+    color: #D91500;
+    font-size: .42rem;
+	margin: .25rem;
+	text-align: center;
+	float: left;
+}
+.page1 .container .wrapper.active{
+	background: url(http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/click_02.png) center center no-repeat;
+    background-size: contain;
+    color: #FFB103;
+}
+
+.page2 .page-title img{
+	width: 3.18rem;
+}
+.page2 .container{
+	margin: 2rem .5rem;
+	font-size: 0;
+	overflow: hidden;
+	text-align: center;
+}
+.page2 .container .wrapper{
+	width: 6.27rem;
+	font-size: 0;
+	display: inline-block;
+	margin: .5rem;
+}
+.page2 .container .wrapper img{
+	width: 100%;
+}
+.page3 .page-title img{
+	width: 5.56rem;
+}
+.page3 .container{
+	margin: 1rem 2rem;
+}
+.page3 .container .text{
+	font-size: .48rem;
+	line-height: .64rem;
+	color: #fff;
+}
+.count{
+	position: absolute;
+	top: .58rem;
+	right: .82rem;
+}
+
+.page4 .container,.page8 .container{
+	padding: 2rem;
+	color: #fff;
+	font-size: .48rem;
+	line-height: .88rem;
+}
+.page4 .container .subject,.page8 .container .subject{
+	margin-bottom: .4rem;
+}
+/*连线题*/
+.page4 .container.lineSub{
+	padding: 1rem;
+	
+}
+.page4 .container.lineSub .col{
+	display: flex;
+	align-items:stretch;
+
+}
+.page4 .container.lineSub .col .box{
+	flex: 1;
+	margin: 1rem .8rem ;
+	display: flex;
+	align-items:stretch;
+}
+.page4 .container.lineSub .col .box .bar{
+	flex: 0 0 1rem;
+	
+}
+.page4 .container.lineSub .col .box .bar .bar-con{
+	text-align: center;
+	padding: .3rem .12rem;
+	background: #FFD96B;
+	color: #B80A16;
+	line-height: .52rem;
+	border-radius: .12rem;
+}
+.page4 .container.lineSub .col .box .text{
+	flex: 1;
+	text-align: justify;
+	padding: .5rem .25rem;
+	background: #D94B3C;
+	border-radius: .12rem;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.page4 .container.lineSub .select{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.6);
+}
+.page4 .container.lineSub .select .select-con{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	background: #B80A16;
+	border-radius: .06rem;
+	text-align: center;
+	width: 12rem;
+	transform: translate(-50%,-50%);
+}
+.page4 .container.lineSub .select .select-con .text{
+	width: 4rem;
+	height: 1.28rem;
+	line-height: 1.28rem;
+	text-align: center;
+	border-radius: .12rem;
+	display: inline-block;
+	margin: .6rem;
+	background: #FFD96B;
+	color: #B80A16;
+}
+.page4 .container.lineSub .select .select-con .text.active{
+	background: #B1B1B1;
+	color: #fff;
+}
+.page4 .container.lineSub .select .select-con .text:active{
+	transform: scale(0.96);
+}
+/*连线题--end*/
+.page4 .container .con .option,.page8 .container .con .option{
+	padding: .5rem;
+	background: #D94B3C;
+	border-radius: .12rem;
+	margin: .5rem 0;
+	line-height: .64rem;
+}
+.page4 .container .con .option.active{
+	background: #FFD96B;
+	color: #B80A16;
+}
+.page4 .mask{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	
+}
+.page4 .mask .con{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+.page4 .mask .con .wrapper{
+	padding: .5rem 2rem;
+	text-align: center;
+	background: rgba(0,0,0,.6);
+}
+.page4 .mask .con .wrapper .item{
+	display: inline-block;
+	overflow: hidden;
+	color: #fff;
+	margin: .2rem .5rem;
+}
+.page4 .mask .con .wrapper .item span{
+	display: inline-block;
+	margin-left: .2rem;
+	line-height: .56rem;
+	height: .56rem;
+	float: left;
+	font-size: .48rem;
+}
+.page4 .mask .con .wrapper .item span.icon{
+	font-size: 0;
+	width: .48rem;
+	height: .48rem;
+	background: url(http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/check_false.png) center center no-repeat;
+	background-size: contain;
+}
+.page4 .mask .con .wrapper .item span.icon.true{
+	font-size: 0;
+	width: .48rem;
+	height: .48rem;
+	background: url(http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/check_true.png) center center no-repeat;
+	background-size: contain;
+}
+.page4 .mask .con .wrapper .item span.icon.error{
+	font-size: 0;
+	width: .48rem;
+	height: .48rem;
+	background: url(http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/check_false.png) center center no-repeat;
+	background-size: contain;
+}
+.page5 .rgb{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 0;
+	background: rgba(0,0,0,.4);
+}
+.page5 .page-title{
+	position: absolute;
+	top: .1rem;
+	left: 0;
+	right: 0;
+}
+.page5 .page-title img{
+	width: 7.31rem;
+}
+.page5 .container{
+	position: relative;
+	margin: 2rem;
+	height: 16rem;
+}
+.page5 .container .con{
+	padding: .1rem 0;
+	position: absolute;
+	left: 0;
+	right: 0;
+	transition: 1s;
+}
+.page5 .container .item{
+	display: flex;
+	background: url(http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/line.png) center center no-repeat;
+	background-size: contain;
+	height: 1.6rem;
+	line-height: 1.6rem;
+}
+.page5 .container .item.top{
+	background: transparent;
+}
+.page5 .container .item .col{
+	flex: 1;
+	text-align: center;
+	font-size: .56rem;
+	color: #fff;
+}
+
+.page6 .container{
+	padding: 2rem;
+	color: #fff;
+	font-size: .48rem;
+	line-height: .88rem;
+}
+.page6 .container .ans,.page6 .container .explain{
+	margin-top: 1rem;
+}
+.page6 .container .question .video{
+	margin-top: .5rem;
+	background: #000;
+}
+.page6 .container .question .img-con{
+	width: 100%;
+}
+.page6 .container .question .img-con img{
+	width: 100%;
+}
+.page6 .container .question .video video{
+	width: 100%;
+}
+.page6 .container .question .video video source{
+	min-width: 100%;
+    min-height: 100%;
+    height: auto;
+    width: auto;
+}
+.page6 .container .question .video audio{
+	width: 500px;
+	height: 86px;
+	font-size: 24px;
+}
+.page7{
+	overflow: hidden;
+}
+.page7 .page-title img{
+	width: 4.1rem;
+}
+.page7 .container{
+	padding: 1rem;
+	text-align: center;
+}
+.page7 .container .wrapper{
+	display: inline-block;
+	width: 4rem;
+	height: 4rem;
+	margin: .2rem .5rem;
+    position: relative;
+    transition: 1s;
+}
+.page7 .container .wrapper .font,.page7 .container .wrapper .reserve{
+	position: absolute;
+	top: 0rem;
+	left: 0rem;
+	right: 0rem;
+	bottom: 0rem;
+	line-height: 4rem;
+	text-align: center;
+	font-size: .68rem;
+	
+	
+}
+.page7 .container .wrapper .font{
+	background: url(http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/ls2.png) center center no-repeat;
+    background-size: contain;
+    color: #C03B2A;
+}
+.page7 .container .wrapper.actived .font{
+	background: url(http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/ls3.png) center center no-repeat;
+    background-size: contain;
+    color: #fff;
+}
+.page7 .container .wrapper .reserve{
+	background: url(http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/ls1.png) center center no-repeat;
+    background-size: contain;
+	transform: rotateY(180deg);
+	color: #FFB103;
+}
+.page7 .container .wrapper {
+	transform-style: preserve-3d;
+	transform: rotateY(0deg);
+}
+.page7 .container .wrapper.trans{
+	transform: rotateY(180deg);
+}
+.page7 .container .wrapper.actived.trans{
+	transform: rotateY(0deg);
+}
+.page8 .container .con .option.active{
+	background: #FFD96B;
+	color: #D94B3C;
+}
+.page8 .container .explain{
+	padding: .5rem;
+	background: rgba(0,0,0,.5);
+	border-radius: .12rem;
+	margin-bottom: .5rem;
+}

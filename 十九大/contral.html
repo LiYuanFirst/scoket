@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>十九大知识竞赛</title>
+    
+   	<!-- 引入样式 -->
+	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+	<link rel="stylesheet" type="text/css" href="css/contral.css"/>
+	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<!-- 引入组件库 -->
+	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body style="background: #fff;">
+	
+<div id="app" v-cloak>
+	
+	<el-tabs 
+		v-model="activeName" 
+		v-loading="loading"
+	    element-loading-text="拼命加载中"
+	    element-loading-spinner="el-icon-loading"
+	    element-loading-background="rgba(0, 0, 0, 0.6)">
+	    <el-tab-pane label="必答题" name="1">
+	    	<div class="container">
+	    		<div class="chose-con">
+	    			<el-button type="primary" size="mini" v-for="(item,index) of list1" :disabled="item.disabled" @click.native="operation('必答题','显示题目',index)">{{item.text}}</el-button>
+	    		</div>
+			  	<el-button type="success" @click.native="operation('必答题','显示规则')">显示规则1</el-button>
+			  	<el-button type="warning" @click.native="operation('必答题','显示答案')">显示答案</el-button>
+			  	<el-button type="danger"  @click.native="operation('必答题','显示排名')">显示排名</el-button>
+	    	</div>
+	    </el-tab-pane>
+	    <el-tab-pane label="抢答题" name="2">
+	    	<div class="container">
+	    		<div class="chose-con">
+	    			<el-button type="primary" size="mini" v-for="(item,index) of list2" :disabled="item.disabled" @click.native="operation('抢答题','显示题目',index)">{{item.text}}</el-button>
+	    		</div>
+			  	<el-button type="success" @click.native="operation('抢答题','显示规则')">显示规则</el-button>
+			  	
+			  	<el-button type="warning" @click.native="operation('抢答题','显示答案')">显示答案</el-button>
+			  	<el-button type="danger" @click.native="operation('抢答题','显示排名')">显示排名</el-button>
+			  	<div class="table">
+			  		<div class="list">
+			  			<div class="item">
+			  				组名
+			  			</div>
+			  			<div class="item">
+			  				必答题分数
+			  			</div>
+			  			<div class="item">
+			  				抢答题分数
+			  			</div>
+			  			<div class="item">
+			  				风险题分数
+			  			</div>
+			  			<div class="item">
+			  				总分
+			  			</div>
+			  		</div>
+			  		<div class="list" v-for="(item,index) of tableData">
+			  			<div class="item">
+			  				{{item.name}}
+			  			</div>
+			  			<div class="item">
+			  				<input type="number" v-model="item.score1" disabled="disabled"/>
+			  			</div>
+			  			<div class="item">
+			  				<input type="number" v-model="item.score2"/>
+			  			</div>
+			  			<div class="item">
+			  				<input type="number" v-model="item.score3" disabled="disabled"/>
+			  			</div>
+			  			<div class="item">
+			  				{{scoreAll[index]}}
+			  			</div>
+			  		</div>
+			  		
+			  	</div>
+			  	<div class="btn-con" style="text-align: center;">
+			  		<el-button type="primary" plain  @click.native="postData('抢答题','提交数据')">提交数据</el-button>
+			  	</div>
+			  	
+	    	</div>
+	    </el-tab-pane>
+	    <el-tab-pane label="风险题" name="3">
+	    	<div class="container">
+	    		<div class="chose-con">
+	    			<el-button type="primary" size="mini" v-for="(item,index) of list3" :disabled="item.disabled" @click.native="operation('风险题','显示题目',index)">{{item.text}}</el-button>
+	    		</div>
+			  	<el-button type="success" @click.native="operation('风险题','显示规则')">显示规则</el-button>
+			  	<el-button type="success" @click.native="operation('风险题','选择分值')">选择分值</el-button>
+			  	<el-button type="warning" @click.native="operation('风险题','显示答案')">显示答案</el-button>
+			  	<el-button type="danger" @click.native="operation('风险题','显示排名')">显示排名</el-button>
+			  	<el-button type="danger" @click.native="operation('风险题','显示最终排名')">显示最终排名</el-button>
+			  	<div class="table">
+			  		<div class="list">
+			  			<div class="item">
+			  				组名
+			  			</div>
+			  			<div class="item">
+			  				必答题分数
+			  			</div>
+			  			<div class="item">
+			  				抢答题分数
+			  			</div>
+			  			<div class="item">
+			  				风险题分数
+			  			</div>
+			  			<div class="item">
+			  				总分
+			  			</div>
+			  		</div>
+			  		<div class="list" v-for="(item,index) of tableData">
+			  			<div class="item">
+			  				{{item.name}}
+			  			</div>
+			  			<div class="item">
+			  				<input type="number" v-model="item.score1" disabled="disabled"/>
+			  			</div>
+			  			<div class="item">
+			  				<input type="number" v-model="item.score2" disabled="disabled"/>
+			  			</div>
+			  			<div class="item">
+			  				<input type="number" v-model="item.score3"/>
+			  			</div>
+			  			<div class="item">
+			  				{{scoreAll[index]}}
+			  			</div>
+			  		</div>
+			  		
+			  	</div>
+			  	<div class="btn-con" style="text-align: center;">
+			  		<el-button type="primary" plain  @click.native="postData('风险题','提交数据')">提交数据</el-button>
+			  	</div>
+	    	</div>
+	    </el-tab-pane>
+	</el-tabs>
+	
+</div>
+
+<script src="js/contral.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>
