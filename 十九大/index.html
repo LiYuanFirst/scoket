@@ -168,7 +168,7 @@
 							<div class="item" v-for="(item,index) in answerList">
 								<span class="name">{{item.name}}</span>
 								<span class="ans">
-									<span v-for="i in item.checked">{{letterList[i]}} </span>
+									<span v-for="i in item.checklist">{{letterList[i]}} </span>
 								</span>
 								<span class="icon" :class="item.score == 0?'error':'true'"></span>
 							</div>

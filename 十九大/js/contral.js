@@ -242,7 +242,15 @@ new Vue({
 				"content": arr
 			};
 			socket.send(JSON.stringify(jsonToSub));
+        },
+        clearData(){
+        	var jsonToSub = {
+				"msgType": '删除数据',
+				"answerType": ''
+			};
+        	socket.send(JSON.stringify(jsonToSub))
         }
+        
     },
     mounted:function(){
     	var that = this;
