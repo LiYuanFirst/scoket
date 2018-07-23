@@ -63,6 +63,14 @@ var list2 = [{
     		id:'008',
     		text:'第八题',
     		disabled:false
+    	},{
+    		id:'008',
+    		text:'第九题',
+    		disabled:false
+    	},{
+    		id:'008',
+    		text:'第十题',
+    		disabled:false
     	}];
 var list3 = [{
     		id:'001',
@@ -182,11 +190,11 @@ new Vue({
     methods: {
         
         operation:function(type,desc,index){
-        	if(type=='必答题'){
-        		if(index<=14){
-        			this.list1[index].disabled=true
-        		}
-        	}
+//      	if(type=='必答题'){
+//      		if(index<=14){
+//      			this.list1[index].disabled=true
+//      		}
+//      	}
         	
         	var jsonToSub = {
         		"msgType":desc,

@@ -313,8 +313,6 @@ new Vue({
 				socket.onopen = function() {
 					that.$dialog.loading.close();
 					that.showpage = 'page2'
-//					that.showpage = 'page4'
-//					that.itemcode = 1
 				};	
 				//获得消息事件
 				socket.onmessage = function(msg) {
@@ -366,6 +364,10 @@ new Vue({
 										break;
 									case '显示答案':
 										//that.answerList = data.content
+										if(data.question>0){
+											that.typeList = typeList1[that.itemcode-1]
+										}
+										that.showpage = 'page4'
 										let arr = []
 										data.content.forEach((item,i) => {
 											if(item){

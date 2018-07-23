@@ -86,7 +86,9 @@
     background-size: contain;
     color: #FFB103;
 }
-
+.page2{
+	overflow: hidden;
+}
 .page2 .page-title img{
 	width: 3.18rem;
 }
