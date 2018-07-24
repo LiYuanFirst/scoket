@@ -5,6 +5,13 @@
 [v-cloak] {
  display: none;
 }
+.container .sub-type{
+	font-size: 0;
+	text-align: center;
+}
+.container .sub-type img{
+	width: 2.48rem;
+}
 .bg{
 	position: absolute;
 	top: 0;
@@ -16,6 +23,19 @@
 }
 .bg .top{
 	width: 100%;
+}
+.bg .group{
+	position: absolute;
+	left: .1rem;
+	top:1.5rem;
+	width:1.6rem;
+	height: 1.63rem;
+	font-size: .36rem;
+	line-height: 1.6rem;
+	color: #fff;
+	text-align: center;
+	background: url(http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/group.png) center center no-repeat;
+	background-size:contain ;
 }
 .bg .bot{
 	position: absolute;
@@ -115,7 +135,7 @@
 }
 .page3 .container .text{
 	font-size: .48rem;
-	line-height: .64rem;
+	line-height: .72rem;
 	color: #fff;
 }
 .count{
@@ -226,7 +246,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	
+	/*background: rgba(255,255,255,.4);*/
 }
 .page4 .mask .con{
 	position: absolute;
@@ -234,16 +254,23 @@
 	right: 0;
 	left: 0;
 }
+.page4 .mask .con .wrapper1{
+	padding: .5rem 2rem 0;
+	text-align: left;
+	background: rgba(0,0,0,.6);
+	color: #fff;
+	font-size: .48rem;
+}
 .page4 .mask .con .wrapper{
-	padding: .5rem 2rem;
-	text-align: center;
+	padding: .2rem 2rem .5rem;
+	text-align: left;
 	background: rgba(0,0,0,.6);
 }
 .page4 .mask .con .wrapper .item{
 	display: inline-block;
 	overflow: hidden;
 	color: #fff;
-	margin: .2rem .5rem;
+	margin: .2rem 1rem .2rem 0rem;
 }
 .page4 .mask .con .wrapper .item span{
 	display: inline-block;
@@ -322,13 +349,16 @@
 }
 
 .page6 .container{
-	padding: 2rem;
+	padding: 1rem 2rem 2rem;
 	color: #fff;
 	font-size: .48rem;
 	line-height: .88rem;
 }
 .page6 .container .ans,.page6 .container .explain{
-	margin-top: 1rem;
+	margin-top: .5rem;
+	padding: .5rem;
+	background: rgba(0,0,0,.5);
+	border-radius: .12rem;
 }
 .page6 .container .question .video{
 	margin-top: .5rem;

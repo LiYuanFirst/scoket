@@ -297,7 +297,7 @@ new Vue({
 		optionchecked:[],//选中选项
 		showWait:false,//显示mask
 		showAnswer:false,//显示答案
-		groupCheckedName:'',//选择组别
+		groupCheckedName:'009',//选择组别
 		groupCheckedNameText:'',
 		groups:groups,//组别
 		scoreList:scoreList,//风险题分值列表
@@ -307,27 +307,11 @@ new Vue({
 		answerList:[]
 	},
 	methods: {
-		//选择组别
-		checkedGroup(name,text){
-			this.groupCheckedName = name
-			this.groupCheckedNameText = text
-		},
-		//选择风险题分数
-		checkedScore(i){
-			this.scoreChecked = i
-		},
+		
 		//确认组别
 		contentScoket(){
 			let that = this;
-			if(this.groupCheckedName==''){
-        		this.$dialog.toast({
-	                mes: '请选择组名',
-	                timeout: 1000,
-	                icon: 'error',
-	                callback: () => {
-	            	}
-	            });
-        	}else{
+			
 				localStorage.groupNum = this.groupCheckedName;
 				console.log(this.groupCheckedName)
 	        	that.$dialog.loading.open('等待连接...');
@@ -386,6 +370,9 @@ new Vue({
 										that.next()
 										break;
 									case '显示答案':
+										clearInterval(tim)
+										clearInterval(tim2)
+										//that.answerList = data.content
 										var s = parseInt(data.question)
 										that.itemcode = s
 										if(s>0){
@@ -465,7 +452,7 @@ new Vue({
 				socket.onerror = function() {
 					alert("发生了错误");
 				}
-        	}
+        	
 		},
 		//必答题选择
 		choseOption(type,index){
@@ -557,7 +544,7 @@ new Vue({
 	                    mes: '答题时间到',
 	                    timeout: 1500,
 	                    callback: () => {
-	                    	this.uploadAnswer()
+	                    	//this.uploadAnswer()
 	                    }
 	                });
 					return
@@ -618,6 +605,6 @@ new Vue({
 	},
 	mounted() {
 		
-		//this.next()
+		this.contentScoket()
 	}
 })

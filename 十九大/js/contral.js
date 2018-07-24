@@ -30,6 +30,14 @@ var list1 = [{
     		id:'008',
     		text:'第八题',
     		disabled:false
+    	},{
+    		id:'009',
+    		text:'第九题',
+    		disabled:false
+    	},{
+    		id:'010',
+    		text:'第十题',
+    		disabled:false
     	}];
 var list2 = [{
     		id:'001',
@@ -106,19 +114,19 @@ var list3 = [{
     		disabled:false
     	},{
     		id:'009',
-    		text:'40-1',
+    		text:'30-1',
     		disabled:false
     	},{
     		id:'010',
-    		text:'40-2',
+    		text:'30-2',
     		disabled:false
     	},{
     		id:'011',
-    		text:'40-3',
+    		text:'30-3',
     		disabled:false
     	},{
     		id:'012',
-    		text:'40-4',
+    		text:'30-4',
     		disabled:false
     	}];
 var socket;
@@ -239,10 +247,17 @@ new Vue({
 				totalScore: 0,
 				group: '008'
 			}];
-			
-			for(var i = 0; i < tableData.length; i++) {
-				arr[i].totalScore = tableData[i].score3;
+			this.loading = true
+			if(type == '抢答题'){
+				for(var i = 0; i < tableData.length; i++) {
+					arr[i].totalScore = tableData[i].score2;
+				}
+			}else{
+				for(var i = 0; i < tableData.length; i++) {
+					arr[i].totalScore = tableData[i].score3;
+				}
 			}
+				
 			var jsonToSub = {
 				"msgType": desc,
 				"answerType": type,
@@ -272,11 +287,20 @@ new Vue({
 		socket.onmessage = function(msg) {
 			var data = JSON.parse(msg.data)
 			console.log(data);
+			if(data.msgType=='返回提交数据'&&data.content=='success'){
+				that.loading = false
+				that.$message({
+		          message: '保存成功',
+		          type: 'success'
+		        });
+			}
 			if(data.answerType=="必答题"&&data.msgType=="显示排名"){
 				var arr = data.content.sort(compare("group"))
 				console.log(arr);
 				for(var i = 0;i<arr.length;i++){
-					that.tableData[i].score1 = arr[i].totalScore
+					that.tableData[i].score1 = arr[i].score1
+					that.tableData[i].score2 = arr[i].score2
+					that.tableData[i].score3 = arr[i].score3
 				}
 			}
 			

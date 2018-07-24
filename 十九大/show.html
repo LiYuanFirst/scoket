@@ -11,9 +11,7 @@
 		<div id="app">
 		    <div class="bg">
 		    	<img class="top" src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/bg_head.png"/>
-		    	<div class="group">
-		    		{{groupCheckedNameText}}
-		    	</div>
+		    	
 		    	<img class="bot" src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/bg_foot.png"/>
 		    	
 		    </div>
@@ -143,7 +141,6 @@
 							</div>
 						</div>
 					</div>
-					<div class="button submit" @click="submitQuesSpe"></div>
 					<div class="select" v-show="showSelect">
 						<div class="select-con">
 							<div class="text" v-for="(item,index) in answerSpe" :class="item.checked ? 'active' : ''" @click="choseTopicTim(item.checked,index)">
@@ -169,12 +166,11 @@
 							>{{item}}</div>
 						
 					</div>
-					<div class="button submit" @click="submitAnswer"></div>
 				</div>
 				<div class="mask" v-show="showWait">
 					<div class="con" v-show="showAnswer">
 						<div class="wrapper1 ">
-							<div style="padding-left: .2rem;" v-show="itemcode>=1">
+							<div style="padding-left: .2rem;"  v-show="itemcode>=1">
 								正确答案：
 								<span v-for="i in typeList.key">{{letterList[i]}} </span>
 							</div>
@@ -455,5 +451,5 @@
 	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/ydui.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/ydui.flexible.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/show.js" type="text/javascript" charset="utf-8"></script>
 </html>
