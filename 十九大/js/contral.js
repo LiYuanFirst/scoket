@@ -151,47 +151,62 @@ new Vue({
     	list3:list3,
     	loading:false,
     	tableData: [{
-	        name: '组一',
-	        score1: 0,
-	        score2: 0,
-	        score3: 0
-        },{
-	        name: '组二',
-	        score1: 0,
-	        score2: 0,
-	        score3: 0
-        },{
-	        name: '组三',
-	        score1: 0,
-	        score1: 0,
-	        score2: 0,
-	        score3: 0
-        },{
-	        name: '组四',
-	        score1: 0,
-	        score2: 0,
-	        score3: 0
-        },{
-	        name: '组五',
-	        score1: 0,
-	        score2: 0,
-	        score3: 0
-        },{
-	        name: '组六',
-	        score1: 0,
-	        score2: 0,
-	        score3: 0
-        },{
-	        name: '组七',
-	        score1: 0,
-	        score2: 0,
-	        score3: 0
-        },{
-	        name: '组八',
-	        score1: 0,
-	        score2: 0,
-	        score3: 0
-        }]
+			name:'忠燃奋进队',
+			userId:'001',
+			sort:1,
+			score1:0,
+			score2:0,
+			score3:0
+		},{
+			name:'奉献联队',
+			userId:'002',
+			sort:2,
+			score1:0,
+			score2:0,
+			score3:0
+		},{
+			name:'崇高理想联盟队',
+			userId:'003',
+			sort:3,
+			score1:0,
+			score2:0,
+			score3:0
+		},{
+			name:'青尽吴有队',
+			userId:'004',
+			sort:4,
+			score1:0,
+			score2:0,
+			score3:0
+		},{
+			name:'申临齐进',
+			userId:'005',
+			sort:5,
+			score1:0,
+			score2:0,
+			score3:0
+		},{
+			name:'梦圆平山队',
+			userId:'006',
+			sort:6,
+			score1:0,
+			score2:0,
+			score3:0
+		},{
+			name:'石油能源队',
+			userId:'007',
+			sort:7,
+			score1:0,
+			score2:0,
+			score3:0
+		},{
+			name:'电融风采队',
+			userId:'008',
+			sort:8,
+			score1:0,
+			score2:0,
+			score3:0
+		}]
      
     	
     },

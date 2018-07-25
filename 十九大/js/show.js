@@ -1,59 +1,59 @@
 var socket;
 var groups = [{
-			name:'组一',
+			name:'忠燃奋进队',
 			userId:'001',
-			sort:2,
-			score1:0,
-			score2:0,
-			score3:0
-		},{
-			name:'组二',
-			userId:'002',
-			sort:4,
-			score1:0,
-			score2:0,
-			score3:0
-		},{
-			name:'组三',
-			userId:'003',
-			sort:8,
-			score1:0,
-			score2:0,
-			score3:0
-		},{
-			name:'组四',
-			userId:'004',
 			sort:1,
 			score1:0,
 			score2:0,
 			score3:0
 		},{
-			name:'组五',
-			userId:'005',
-			sort:7,
+			name:'奉献联队',
+			userId:'002',
+			sort:2,
 			score1:0,
 			score2:0,
 			score3:0
 		},{
-			name:'组六',
+			name:'崇高理想联盟队',
+			userId:'003',
+			sort:3,
+			score1:0,
+			score2:0,
+			score3:0
+		},{
+			name:'青尽吴有队',
+			userId:'004',
+			sort:4,
+			score1:0,
+			score2:0,
+			score3:0
+		},{
+			name:'申临齐进',
+			userId:'005',
+			sort:5,
+			score1:0,
+			score2:0,
+			score3:0
+		},{
+			name:'梦圆平山队',
 			userId:'006',
 			sort:6,
 			score1:0,
 			score2:0,
 			score3:0
 		},{
-			name:'组七',
+			name:'石油能源队',
 			userId:'007',
-			sort:5,
+			sort:7,
 			score1:0,
 			score2:0,
 			score3:0
 		},{
-			name:'组八',
+			name:'电融风采队',
 			userId:'008',
-			sort:3,
+			sort:8,
 			score1:0,
-			score2:10,
+			score2:0,
 			score3:0
 		}];
 var scoreList = [{
@@ -380,10 +380,12 @@ new Vue({
 										}
 										that.showpage = 'page4'
 										let arr = []
-										data.content.forEach((item,i) => {
+										var groupName = that.groups
+										console.log(groupName)
+										data.content.forEach((item,index) => {
 											if(item){
+												item.name = groupName[index].name
 												arr.push(item)
-												arr[i].name = that.groups[i].name
 											}
 										})
 										console.log(arr)

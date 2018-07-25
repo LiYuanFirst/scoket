@@ -28,7 +28,7 @@ var groups = [{
 			score2:0,
 			score3:0
 		},{
-			name:'申临齐进队',
+			name:'申临齐进',
 			userId:'005',
 			sort:5,
 			score1:0,
@@ -297,7 +297,7 @@ new Vue({
 		optionchecked:[],//选中选项
 		showWait:false,//显示mask
 		showAnswer:false,//显示答案
-		groupCheckedName:'',//选择组别
+		groupCheckedName:'010',//选择组别
 		groupCheckedNameText:'',
 		groups:groups,//组别
 		scoreList:scoreList,//风险题分值列表
@@ -307,27 +307,11 @@ new Vue({
 		answerList:[]
 	},
 	methods: {
-		//选择组别
-		checkedGroup(name,text){
-			this.groupCheckedName = name
-			this.groupCheckedNameText = text
-		},
-		//选择风险题分数
-		checkedScore(i){
-			this.scoreChecked = i
-		},
+		
 		//确认组别
 		contentScoket(){
 			let that = this;
-			if(this.groupCheckedName==''){
-        		this.$dialog.toast({
-	                mes: '请选择组名',
-	                timeout: 1000,
-	                icon: 'error',
-	                callback: () => {
-	            	}
-	            });
-        	}else{
+			
 				localStorage.groupNum = this.groupCheckedName;
 				console.log(this.groupCheckedName)
 	        	that.$dialog.loading.open('等待连接...');
@@ -335,7 +319,7 @@ new Vue({
 	        	//打开事件
 				socket.onopen = function() {
 					that.$dialog.loading.close();
-					that.showpage = 'page2'
+					that.showpage = 'page5'
 				};	
 				//获得消息事件
 				socket.onmessage = function(msg) {
@@ -357,105 +341,6 @@ new Vue({
 							})
 						},1000)
 						
-					}else if (msgType == '返回提交数据'){
-						that.$dialog.loading.close();
-		                that.showWait= true;
-		                that.$dialog.notify({
-		                    mes: '提交成功，等待答题结果显示',
-		                    callback: () => {
-		                       
-		                    }
-		                });
-					}else{
-						switch(answerType){
-							case '必答题':
-								switch (msgType){
-									case '显示规则':
-										that.ruleNum = '0'
-										that.showpage = 'page3'
-										break;
-									case '显示题目':
-										
-										that.showWait = false
-										that.showAnswer = false
-										that.itemcode = data.question
-										if(data.question>0){
-											that.typeList = typeList1[that.itemcode-1]
-										}
-										that.showpage = 'page4'
-										that.next()
-										break;
-									case '显示答案':
-										var s = parseInt(data.question)
-										that.itemcode = s
-										if(s>0){
-											that.typeList = typeList1[s-1]
-										}
-										that.showpage = 'page4'
-										let arr = []
-										var groupName = that.groups
-										console.log(groupName)
-										data.content.forEach((item,index) => {
-											if(item){
-												item.name = groupName[index].name
-												arr.push(item)
-											}
-										})
-										console.log(arr)
-										that.answerList = arr
-										that.showWait = true
-										that.showAnswer = true
-										break;
-									default:
-										break;
-								}
-								break;	
-							case '抢答题':
-								switch (msgType){
-									case '显示规则':
-										that.showAnswer = false
-										that.ruleNum = '1'
-										that.showpage = 'page3'
-										break;
-									case '显示题目':
-										that.showAnswer = false
-										that.itemcode = data.question + 1
-										that.showpage = 'page6'
-										break;
-									case '显示答案':
-										that.showAnswer = true
-										break;
-								}
-								break;	
-							case '风险题':
-								switch (msgType){
-									case '显示规则':
-										that.showAnswer = false
-										that.ruleNum = '2'
-										that.showpage = 'page3'
-										break;
-									case '选择分值':
-										that.showAnswer = false
-										that.scoreList = data.content
-										that.showpage = 'page7'
-										break;
-									case '显示题目':
-										that.showAnswer = false
-										that.itemcode = data.question
-										that.scoreChecked = data.question
-										setTimeout(() => {
-											that.typeList = typeList3[that.itemcode]
-											that.showpage = 'page8'
-										},1200)
-										
-										break;
-									case '显示答案':
-										that.showAnswer = true
-										break;
-								}
-							default:
-								break;
-						}
 					}
 					
 				}
@@ -467,159 +352,13 @@ new Vue({
 				socket.onerror = function() {
 					alert("发生了错误");
 				}
-        	}
-		},
-		//必答题选择
-		choseOption(type,index){
-			console.log(type+'-'+index)
-			
-			if(type == '01'){
-				let i = this.optionchecked.indexOf(index)
-				if(i > -1){
-					this.optionchecked.splice(i,1)
-				}else{
-					this.$set(this.optionchecked,0,index)
-				}
-			}else{
-				let optionchecked = this.optionchecked;
-				let i = this.optionchecked.indexOf(index)
-				if(i > -1){
-					this.optionchecked.splice(i,1)
-				}else{
-					this.optionchecked.push(index)
-				}
-			}
-			console.log(this.optionchecked)
-		},
-		//提前提交
-		submitAnswer(){
-			if(this.optionchecked.length === 0){
-				this.$dialog.toast({
-	                mes: '您还未选择答案',
-	                timeout: 1000,
-	                icon: 'error',
-	                callback: () => {
-	                	
-	            	}
-	            });
-			}else{
-				
-				this.uploadAnswer()
-			}
-		},
-		//上传答案
-		uploadAnswer(){
-			clearInterval(tim)
-			clearInterval(tim2)
-			this.$dialog.loading.open('提交中');
-			var request = {
-        		"msgType":"提交数据",
-        		"answerType":"必答题",
-        		"question":this.itemcode,
-        		"content":{
-        			id:localStorage.groupNum,
-					index:this.itemcode,
-					checklist:this.optionchecked.sort(),
-					score:10,
-					time:countTime2
-        		}
-        	};
-			if(this.itemcode === 0){
-				let trueRes = ['十六大主题','十七大主题','十八大主题','十九大主题']
-				if(this.quesSpe.toString() === trueRes.toString()){
-					request.content.score = 10
-				}else{
-					request.content.score = 0
-				}
-			}else{
-				if(this.typeList.key.sort().toString() === this.optionchecked.sort().toString()){
-					request.content.score = 10
-				}else{
-					request.content.score = 0
-				}
-			}
-			console.log(request)
-			socket.send(JSON.stringify(request));
-			
-		},
-		//开始下一题（必答题）
-		next(){
-			clearInterval(tim)
-			clearInterval(tim2)
-			this.countTime = 29
-			this.optionchecked = []
-			countTime2 = 0
-			this.progress2 = 0
-			let s= 0
-			tim = setInterval(()=>{
-				if(this.countTime <= 1) {
-					clearInterval(tim)
-					clearInterval(tim2)
-					this.$dialog.toast({
-	                    mes: '答题时间到',
-	                    timeout: 1500,
-	                    callback: () => {
-	                    	this.uploadAnswer()
-	                    }
-	                });
-					return
-				}
-				s++
-				let pro = (s/30).toFixed(2)
-				this.progress2 = pro
-				setTimeout(() => {
-					this.countTime --
-				},1000)
-			},1000)
-			tim2 = setInterval(() => {
-				countTime2+=100
-			},100)
-		},
-		
-		//选择连线题主题内容
-		choseTopic(i){
-			if(this.quesSpe[i]==''){
-				this.quesSpeIndex = i
-				this.showSelect = true
-			}else{
-				let val = this.quesSpe[i]
-				this.answerSpe.forEach((item,index) => {
-					if(item.text === val){
-						this.$set(this.answerSpe,index,{text:item.text,checked:false})
-					}
-				})
-				this.$set(this.quesSpe,i,'')
-			}
-		},
-		choseTopicTim(stu,index){
-			if(stu){
-				return
-			}else{
-				let i = this.quesSpeIndex
-				let val = this.answerSpe[index].text
-				this.$set(this.answerSpe,index,{text:val,checked:true})
-				this.$set(this.quesSpe,i,val)
-				this.showSelect = false
-			}
-		},
-		submitQuesSpe(){
-			
-			console.log(this.quesSpe)
-			if(this.quesSpe.indexOf('') > -1){
-				this.$dialog.toast({
-		            mes: '答案尚未填写完全',
-		            timeout: 1000,
-		            icon: 'error',
-		            callback: () => {
-		            }
-		        });
-			}else{
-				this.uploadAnswer()
-			}
+        	
 		}
+		
+		
 	},
 	mounted() {
 		
-		//this.next()
+		this.contentScoket()
 	}
 })

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>十九大知识竞赛</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/ydui.rem.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	</head>
+	<body>
+		<div id="app">
+		    <div class="bg">
+		    	<img class="top" src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/bg_head.png"/>
+		    	
+		    	<img class="bot" src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/bg_foot.png"/>
+		    	
+		    </div>
+			<!--选择组别-->
+			<div class="page page1" v-show="showpage=='page1'">
+				<div class="page-logo">
+					<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/logos.png"/>
+				</div>
+				<div class="page-title">
+					<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/font_01.png"/>
+				</div>
+				<div class="container">
+					<div class="wrapper" :class="item.userId == groupCheckedName? 'active' : ''" v-for="(item,index) in groups" @click="checkedGroup(item.userId,item.name)">
+						{{item.name}}
+					</div>
+				</div>
+				<div class="button" @click="contentScoket"></div>
+			</div>
+			<!--选择组别--end-->
+			<!--选择关卡-->
+			<div class="page page2" v-show="showpage=='page2'">
+				<div class="page-logo">
+					<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/logos.png"/>
+				</div>
+				<div class="page-title">
+					<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/font_10.png"/>
+				</div>
+				<div class="container">
+					<div class="wrapper">
+						<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/click_04.png"/>
+					</div>
+					<div class="wrapper">
+						<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/click_05.png"/>
+					</div>
+					<div class="wrapper">
+						<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/click_06.png"/>
+					</div>
+				</div>
+			</div>
+			<!--选择关卡--end-->
+			<!--显示规则-->
+			<div class="page page3" v-show="showpage=='page3'">
+				<div class="page-logo">
+					<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/logos.png"/>
+				</div>
+				<div class="page-title">
+					<img :src="ruleList[ruleNum].src"/>
+				</div>
+				<div class="container">
+					<div class="text" v-html="ruleList[ruleNum].text"></div>
+				</div>
+			</div>
+			<!--显示规则--end-->
+			<!--必答题-->
+			<div class="page page4" v-show="showpage=='page4'">
+				<div class="page-logo">
+					<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/logos.png"/>
+				</div>
+				<div class="count" style="width: 1.48rem;height: 1.48rem;">
+		            <yd-progressbar
+		                    :progress="progress2"
+		                    trail-width="6"
+		                    stroke-width="6"
+		                    stroke-color="#fff"
+		                    trail-color="#bcbcbc"
+		                    fill-color="transparent"
+		            >{{countTime}}s</yd-progressbar>
+		        </div>
+				<div class="container lineSub" v-show="itemcode==0">
+					<div class="sub-type">
+						<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/t_03.png"/>
+					</div>
+					<div class="subject">
+						
+					</div>
+					<div class="con">
+						<div class="col">
+							<div class="box">
+								<div class="bar">
+									<div class="bar-con" v-show="quesSpe[0].length>0">
+									{{quesSpe[0]}}
+									</div>
+								</div>
+								<div class="text" @click="choseTopic(0)">
+									<span>
+									“高举邓小平理论伟大旗帜，全面贯彻“三个代表”重要思想，继往开来，与时俱进，全面建设小康社会，加快推进社会主义现代化，为开创中国特色社会主义事业新局面而奋斗.”
+									</span>
+								</div>
+							</div>
+							<div class="box">
+								<div class="text" @click="choseTopic(1)">
+									<span>
+									“高举中国特色社会主义伟大旗帜,以邓小平理论和“三个代表”重要思想为指导,深入贯彻落实科学发展观,继续解放思想,坚持改革开放,推动科学发展,促进社会和谐,为夺取全面建设小康社会新胜利而奋斗。
+									</span>
+								</div>
+								<div class="bar">
+									<div class="bar-con" v-show="quesSpe[1].length>0">
+									{{quesSpe[1]}}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col">
+							<div class="box">
+								<div class="bar">
+									<div class="bar-con" v-show="quesSpe[2].length>0">
+									{{quesSpe[2]}}
+									</div>
+								</div>
+								<div class="text" @click="choseTopic(2)">
+									<span>
+									“高举中国特色社会主义伟大旗帜，以邓小平理论、“三个代表”重要思想、科学发展观为指导，解放思想，改革开放，凝聚力量，攻坚克难，坚定不移沿着中国特色社会主义道路前进，为全面建成小康社会而奋斗。”
+									</span>
+								</div>
+							</div>
+							<div class="box">
+								<div class="text" @click="choseTopic(3)">
+									<span>
+									“不忘初心，牢记使命，高举中国特色社会主义伟大旗帜，决胜全面建成小康社会，夺取新时代中国特色社会主义伟大胜利，为实现中华民族伟大复兴的中国梦不懈奋斗。
+									</span>
+								</div>
+								<div class="bar">
+									<div class="bar-con" v-show="quesSpe[3].length>0">
+									{{quesSpe[3]}}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="select" v-show="showSelect">
+						<div class="select-con">
+							<div class="text" v-for="(item,index) in answerSpe" :class="item.checked ? 'active' : ''" @click="choseTopicTim(item.checked,index)">
+								{{item.text}}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="container" v-show="itemcode>=1">
+					<div class="sub-type">
+						<img v-if="typeList.type=='01'" src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/t_01.png"/>
+						<img v-if="typeList.type=='02'" src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/t_02.png"/>
+					</div>
+					<div class="subject">
+						{{typeList.question}}
+					</div>
+					<div class="con">
+						<div 
+							class="option" 
+							v-for="(item,index) of typeList.options"
+							@click="choseOption(typeList.type,index)"
+							:class="[optionchecked.indexOf(index) > -1 ? 'active' : '']"
+							>{{item}}</div>
+						
+					</div>
+				</div>
+				<div class="mask" v-show="showWait">
+					<div class="con" v-show="showAnswer">
+						<div class="wrapper1 ">
+							<div style="padding-left: .2rem;"  v-show="itemcode>=1">
+								正确答案：
+								<span v-for="i in typeList.key">{{letterList[i]}} </span>
+							</div>
+							
+						</div>
+						<div class="wrapper">
+							<div class="item" v-for="(item,index) in answerList">
+								<span class="name">{{item.name}}：</span>
+								<span class="ans">
+									<span v-for="i in item.checklist">{{letterList[i]}} </span>
+								</span>
+								<span class="icon" :class="item.score == 0?'error':'true'"></span>
+							</div>
+							
+						</div>
+							
+					</div>
+				</div>
+			</div>
+			<!--必答题 --end-->
+			<!--排行榜-->
+			<div class="page page5" style="overflow: hidden;" v-show="showpage=='page5'">
+				<div class="rgb"></div>
+				<div class="page-logo">
+					<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/logos.png"/>
+				</div>
+				<div class="page-title">
+					<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/font_11.png"/>
+				</div>
+				<div class="container">
+					<div class="con" style="top:0;">
+						<div class="item top">
+							<div class="col">排名</div>
+							<div class="col">组名</div>
+							<div class="col">必答题得分</div>
+							<div class="col">抢答题得分</div>
+							<div class="col">风险题得分</div>
+							<div class="col">总得分</div>
+						</div>
+					</div>
+					<div class="con" v-for="item in groups" :style="{ top: item.sort*1.6 + 'rem' }">	
+						<div class="item">
+							<div class="col">{{item.sort}}</div>
+							<div class="col">{{item.name}}</div>
+							<div class="col">{{item.score1}}</div>
+							<div class="col">{{item.score2}}</div>
+							<div class="col">{{item.score3}}</div>
+							<div class="col">{{item.score1+item.score2+item.score3}}</div>
+						</div>
+						
+					</div>
+				</div>
+				
+			</div>
+			<!--排行榜--end-->
+			<!--抢答题-->
+			<div class="page page6"  v-show="showpage=='page6'">
+				<div class="page-logo">
+					<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/logos.png"/>
+				</div>
+				<div class="container ques1" v-show="itemcode==1">
+					<div class="sub-type">
+						<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/t_04.png"/>
+					</div>
+					<div class ="question">
+						<div class="">
+							中国共产党人的初心和使命是____。
+						</div>
+					</div>
+					<div class="ans" v-show="showAnswer">
+						答案：为中国人民谋幸福，为中华民族谋复兴。
+					</div>
+					<div class="explain" v-show="showAnswer">
+						解析：十九大报告中，序言第四段中指出，中国共产党人的初心和使命，就是为中国人民谋幸福，为中华民族谋复兴。这个初心和使命是激励中国共产党人不断前进的根本动力。
+					</div>
+				</div>
+				<div class="container ques7" v-if="itemcode==7">
+					<div class="sub-type">
+						<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/t_07.png"/>
+					</div>
+					<div class ="question">
+						<div class="">
+							请问视频中宣扬的是习总书记提出哪种理念，2005年8月，时任浙江省委书记的习近平同志在浙江湖州安吉考察时，提出了该理念。
+						</div>
+						<div class="video" v-show="!showAnswer">
+							<video preload="auto" controls="controls" poster="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/2-3.png">
+							  	<source src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/2-2.mp4" type="video/mp4">
+							</video>
+						</div>
+					</div>
+					<div class="ans" v-show="showAnswer">
+						答案：绿水青山就是金山银山。
+					</div>
+					<div class="explain" v-show="showAnswer">
+						解析：习近平总书记系列重要讲话，2017年10月18日，习近平同志在十九大报告中指出，坚持人与自然和谐共生。必须树立和践行绿水青山就是金山银山的理念，坚持节约资源和保护环境的基本国策。
+					</div>
+				</div>
+				<div class="container ques8" v-if="itemcode==8">
+					<div class="sub-type">
+						<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/t_07.png"/>
+					</div>
+					<div class ="question">
+						<div class="">
+							2018年6月27日，为大力表彰宣传信念坚定、对党忠诚、担当作为、干事创业的新时代典型，党中央决定对7名同志追授为“全国优秀共产党员”称号，请问下面哪位先进人物不在这次表彰的7位人物中？<br />
+							A、钟扬 &nbsp;&nbsp; B、张超 &nbsp;&nbsp; C、林俊德 &nbsp;&nbsp; D、姜仕坤
+						</div>
+						<div class="video" v-show="!showAnswer">
+							<video preload="auto" controls="controls" poster="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/2-2.png">
+							  	<source src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/1_2.mp4" type="video/mp4">
+							</video>
+						</div>
+					</div>
+					<div class="ans" v-show="showAnswer">
+						答案：C、林俊德
+					</div>
+				</div>
+				<div class="container ques6" v-show="itemcode==6">
+					<div class="sub-type">
+						<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/t_05.png"/>
+					</div>
+					<div class ="question">
+						<div class="">
+							请说出，这是什么地方，位于哪里
+						</div>
+						<div class="img-con" v-show="!showAnswer">
+							<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/pic_02.png"/>
+						</div>
+					</div>
+					<div class="ans" v-show="showAnswer">
+						答案：中共二大会址，位于上海南成都路辅德里625号（今老成都北路7弄30号）
+					</div>
+					<div class="explain" v-show="showAnswer">
+						解析：2017年10月18日，习近平同志在十九大报告中指出，坚持人与自然和谐共生。必须树立和践行绿水青山就是金山银山的理念，坚持节约资源和保护环境的基本国策。2005年8月，时任浙江省委书记的习近平同志在浙江湖州安吉考察时，提出了“绿水青山就是金山银山”的科学论断。
+					</div>
+				</div>
+				<div class="container ques9" v-if="itemcode==9">
+					<div class="sub-type">
+						<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/t_06.png"/>
+					</div>
+					<div class ="question">
+						<div class="">
+							请说出语音中“幸福都是奋斗出来的”这句话，出自习总书记的哪次讲话，语音中这段讲话时间是什么时候？
+						</div>
+						<div class="video" style="background: transparent;" v-show="!showAnswer">
+							<audio src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/audio1.mp3" controls="controls"></audio>
+						</div>
+					</div>
+					<div class="ans" v-show="showAnswer">
+						答案：幸福都是奋斗出来的”出自2017年12月31日国家主席习近平发表的二〇一八年新年贺词。
+					</div>
+				</div>
+				<div class="container ques4" v-show="itemcode==4">
+					<div class="sub-type">
+						<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/t_05.png"/>
+					</div>
+					<div class ="question">
+						<div class="">
+							党的十九届中央委员会第一次全体会议选举__、__、__、__、__、__、__ 为中央政治局常委。____任中央纪委书记。
+						</div>
+						<div class="img-con" v-show="!showAnswer">
+							<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/pic_01.png"/>
+						</div>
+					</div>
+					<div class="ans" v-show="showAnswer">
+						答案：习近平、李克强、栗战书、汪洋、王沪宁、赵乐际、韩正; 赵乐际
+					</div>
+				</div>
+				<div class="container ques5" v-show="itemcode==5">
+					<div class="sub-type">
+						<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/t_04.png"/>
+					</div>
+					<div class ="question">
+						<div class="">
+							十九大报告的题目是：____。
+						</div>
+					</div>
+					<div class="ans" v-show="showAnswer">
+						答案：决胜全面建成小康社会 夺取新时代中国持色社会主义伟大胜利。
+					</div>
+				</div>
+				<div class="container ques10" v-show="itemcode==10">
+					<div class="sub-type">
+						<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/t_08.png"/>
+					</div>
+					<div class ="question">
+						<div class="">
+							10月31日中午，习近平等在瞻仰中共一大会址、参观《伟大开端——中国共产党创建历史陈列》后，来到中共一大纪念馆宣誓厅，面对党旗一起重温入党誓词。在习近平总书记领誓下，中央政治局常委同志举起右拳，庄严宣誓。请各位选手完整说出入党誓词内容。
+						</div>
+					</div>
+					<div class="ans" v-show="showAnswer">
+						答案：我志愿加入中国共产党，拥护党的纲领，遵守党的章程，履行党员义务，执行党的决定，严守党的纪律，保守党的秘密，对党忠诚，积极工作，为共产主义奋斗终身，随时准备为党和人民牺牲一切，永不叛党
+					</div>
+				</div>
+				<div class="container ques2" v-show="itemcode==2">
+					<div class="sub-type">
+						<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/t_04.png"/>
+					</div>
+					<div class ="question">
+						<div class="">
+							十九大报告指出，从现在到二0二0年，是全面建成小康社会____。从十九大到二十大，是“两个一百年”奋斗目标的历史____。我们既要全面建成小康社会、实现第一个百年奋斗目标，又要乘势而上开启全面建设社会主义现代化国家新征程，向第二个百年奋斗目标进军。
+						</div>
+					</div>
+					<div class="ans" v-show="showAnswer">
+						答案：决胜期、交汇期。
+					</div>
+					<div class="explain" v-show="showAnswer">
+						解析：十九大报告中，第四章节，第二、第三段中指出，从现在到二〇二〇年，是全面建成小康社会决胜期。从十九大到二十大，是“两个一百年”奋斗目标的历史交汇期。我们既要全面建成小康社会、实现第一个百年奋斗目标，又要乘势而上开启全面建设社会主义现代化国家新征程，向第二个百年奋斗目标进军。
+					</div>
+				</div>
+				<div class="container ques3" v-show="itemcode==3">
+					<div class="sub-type">
+						<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/t_08.png"/>
+					</div>
+					<div class ="question">
+						<div class="">
+							对党员的纪律处分有哪些？
+						</div>
+					</div>
+					<div class="ans" v-show="showAnswer">
+						答案：警告、严重警告、撤销党内职务、留党察看、开除党籍。
+					</div>
+					<div class="explain" v-show="showAnswer">
+						解析：《党章》第七章 第四十一条 对党员的纪律处分有五种：警告、严重警告、撤销党内职务、留党察看、开除党籍。
+					</div>
+				</div>
+			</div>
+			<!--抢答题--end-->
+			<div class="page page7" v-show="showpage=='page7'">
+				<div class="page-logo">
+					<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/logos.png"/>
+				</div>
+				<div class="page-title">
+					<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/font_05.png"/>
+				</div>
+				<div class="container">
+					<div class="wrapper" 
+						v-for="(item,index) in scoreList" 
+						:class="[item.actived?'actived':'',scoreChecked==index?'trans':'']"
+						>
+						<div class="reserve">{{item.score}}分</div>
+						<div class="font">{{item.score}}分</div>
+					</div>
+				</div>
+			</div>
+			<!---->
+			<div class="page page8" v-show="showpage=='page8'">
+				<div class="page-logo">
+					<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/logos.png"/>
+				</div>
+				<div class="container">
+					<div class="sub-type">
+						<img v-if="typeList.type=='01'" src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/t_01.png"/>
+						<img v-if="typeList.type=='02'" src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/t_02.png"/>
+						<img v-if="typeList.type=='03'" src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/t_04.png"/>
+					</div>
+					<div class="subject">
+						{{typeList.question}}
+					</div>
+					<div class="con" v-if="typeList.type!=='03'">
+						<div 
+							class="option" 
+							v-for="(option,index) of typeList.options"
+							:class="[typeList.key.indexOf(index)>-1&&showAnswer?'active':'']"
+							>{{option}}</div>
+						
+					</div>
+					<div class="explain" v-show="showAnswer&&typeList.type=='03'">
+						答案：{{typeList.key[0]}}
+					</div>
+					<div class="explain" v-show="showAnswer && typeList.explain">
+						解析：{{typeList.explain}}
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</body>
+	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/ydui.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/ydui.flexible.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/show2.js" type="text/javascript" charset="utf-8"></script>
+</html>
