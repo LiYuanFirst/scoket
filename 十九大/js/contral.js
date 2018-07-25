@@ -97,6 +97,22 @@ var list3 = [{
     		text:'10-4',
     		disabled:false
     	},{
+    		id:'001',
+    		text:'10-5',
+    		disabled:false
+    	},{
+    		id:'002',
+    		text:'10-6',
+    		disabled:false
+    	},{
+    		id:'003',
+    		text:'10-7',
+    		disabled:false
+    	},{
+    		id:'004',
+    		text:'10-8',
+    		disabled:false
+    	},{
     		id:'005',
     		text:'20-1',
     		disabled:false
@@ -113,6 +129,22 @@ var list3 = [{
     		text:'20-4',
     		disabled:false
     	},{
+    		id:'005',
+    		text:'20-5',
+    		disabled:false
+    	},{
+    		id:'006',
+    		text:'20-6',
+    		disabled:false
+    	},{
+    		id:'007',
+    		text:'20-7',
+    		disabled:false
+    	},{
+    		id:'008',
+    		text:'20-8',
+    		disabled:false
+    	},{
     		id:'009',
     		text:'30-1',
     		disabled:false
@@ -127,6 +159,22 @@ var list3 = [{
     	},{
     		id:'012',
     		text:'30-4',
+    		disabled:false
+    	},{
+    		id:'009',
+    		text:'30-5',
+    		disabled:false
+    	},{
+    		id:'010',
+    		text:'30-6',
+    		disabled:false
+    	},{
+    		id:'011',
+    		text:'30-7',
+    		disabled:false
+    	},{
+    		id:'012',
+    		text:'30-8',
     		disabled:false
     	}];
 var socket;

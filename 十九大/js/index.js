@@ -254,7 +254,7 @@ new Vue({
 	data: {
 		showpage:'page1',//显示页面
 		progress2: 0,//圆环进度
-		countTime:30,//倒计时
+		countTime:180,//倒计时
 		countTime2:0,//答题用时
 		itemcode:0,//当前题号
 		ruleNum:0,
@@ -386,6 +386,8 @@ new Vue({
 										that.next()
 										break;
 									case '显示答案':
+										clearInterval(tim)
+										clearInterval(tim2)
 										var s = parseInt(data.question)
 										that.itemcode = s
 										if(s>0){
@@ -497,10 +499,7 @@ new Vue({
 				this.$dialog.toast({
 	                mes: '您还未选择答案',
 	                timeout: 1000,
-	                icon: 'error',
-	                callback: () => {
-	                	
-	            	}
+	                icon: 'error'
 	            });
 			}else{
 				
@@ -546,26 +545,27 @@ new Vue({
 		next(){
 			clearInterval(tim)
 			clearInterval(tim2)
-			this.countTime = 29
+			this.countTime = 179
 			this.optionchecked = []
 			countTime2 = 0
 			this.progress2 = 0
 			let s= 0
 			tim = setInterval(()=>{
+				//倒计时时间到
 				if(this.countTime <= 1) {
 					clearInterval(tim)
 					clearInterval(tim2)
 					this.$dialog.toast({
-	                    mes: '答题时间到',
+	                    mes: '答题结束',
 	                    timeout: 1500,
 	                    callback: () => {
-	                    	this.uploadAnswer()
+	                    	//this.uploadAnswer()
 	                    }
 	                });
 					return
 				}
 				s++
-				let pro = (s/30).toFixed(2)
+				let pro = (s/180).toFixed(2)
 				this.progress2 = pro
 				setTimeout(() => {
 					this.countTime --

@@ -269,7 +269,7 @@
 						答案：绿水青山就是金山银山。
 					</div>
 					<div class="explain" v-show="showAnswer">
-						解析：习近平总书记系列重要讲话，2017年10月18日，习近平同志在十九大报告中指出，坚持人与自然和谐共生。必须树立和践行绿水青山就是金山银山的理念，坚持节约资源和保护环境的基本国策。
+						解析：2017年10月18日，习近平同志在十九大报告中指出，坚持人与自然和谐共生。必须树立和践行绿水青山就是金山银山的理念，坚持节约资源和保护环境的基本国策。2005年8月，时任浙江省委书记的习近平同志在浙江湖州安吉考察时，提出了“绿水青山就是金山银山”的科学论断。
 					</div>
 				</div>
 				<div class="container ques8" v-if="itemcode==8">
@@ -305,9 +305,6 @@
 					</div>
 					<div class="ans" v-show="showAnswer">
 						答案：中共二大会址，位于上海南成都路辅德里625号（今老成都北路7弄30号）
-					</div>
-					<div class="explain" v-show="showAnswer">
-						解析：2017年10月18日，习近平同志在十九大报告中指出，坚持人与自然和谐共生。必须树立和践行绿水青山就是金山银山的理念，坚持节约资源和保护环境的基本国策。2005年8月，时任浙江省委书记的习近平同志在浙江湖州安吉考察时，提出了“绿水青山就是金山银山”的科学论断。
 					</div>
 				</div>
 				<div class="container ques9" v-if="itemcode==9">
@@ -410,12 +407,21 @@
 					<img src="http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/font_05.png"/>
 				</div>
 				<div class="container">
-					<div class="wrapper" 
+					<!--<div class="wrapper" 
 						v-for="(item,index) in scoreList" 
 						:class="[item.actived?'actived':'',scoreChecked==index?'trans':'']"
-						>
-						<div class="reserve">{{item.score}}分</div>
-						<div class="font">{{item.score}}分</div>
+						>-->
+					<div class="wrapper" >
+						<div class="reserve">10分</div>
+						<div class="font">10分</div>
+					</div>
+					<div class="wrapper" >
+						<div class="reserve">20分</div>
+						<div class="font">20分</div>
+					</div>
+					<div class="wrapper" >
+						<div class="reserve">30分</div>
+						<div class="font">30分</div>
 					</div>
 				</div>
 			</div>
