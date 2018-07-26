@@ -6,6 +6,12 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link rel="stylesheet" type="text/css" href="css/ydui.rem.css"/>
 		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<style type="text/css">
+			.page6 .container .question .img-con,.page6 .container .question .video{
+				width: 80%;
+				margin: .1rem auto;
+			}
+		</style>
 	</head>
 	<body>
 		<div id="app">
@@ -143,7 +149,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="button submit" @click="submitQuesSpe"></div>
+					<div class="button submit" :class="showWait?'active':''" @click="submitQuesSpe"></div>
 					<div class="select" v-show="showSelect">
 						<div class="select-con">
 							<div class="text" v-for="(item,index) in answerSpe" :class="item.checked ? 'active' : ''" @click="choseTopicTim(item.checked,index)">
@@ -169,7 +175,7 @@
 							>{{item}}</div>
 						
 					</div>
-					<div class="button submit" @click="submitAnswer"></div>
+					<div class="button submit"  :class="showWait?'active':''" @click="submitAnswer"></div>
 				</div>
 				<div class="mask" v-show="showWait">
 					<div class="con" v-show="showAnswer">

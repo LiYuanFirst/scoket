@@ -60,11 +60,18 @@
 .button:active{
 	transform: scale(.96,.96);
 }
+.button.active{
+	background: url(http://bucket-sngfr.oss-cn-shanghai.aliyuncs.com/active/20180628/btn_active.png) center center no-repeat;
+    background-size: contain;
+}
 .page{
 	position: relative;
 	/*top: 0;
 	left: 0;
 	width: 100%;*/
+}
+.page.page3{
+	overflow: hidden;
 }
 .page-logo{
 	font-size: 0;
@@ -132,11 +139,11 @@
 	width: 5.56rem;
 }
 .page3 .container{
-	margin: 2.5rem 2rem;
+	margin: 2.5rem 1.6rem;
 }
 .page3 .container .text{
-	font-size: .48rem;
-	line-height: 1rem;
+	font-size: .60rem;
+	line-height: 1.2rem;
 	color: #fff;
 }
 .count{
@@ -166,7 +173,7 @@
 }
 .page4 .container.lineSub .col .box{
 	flex: 1;
-	margin: 1rem .8rem ;
+	margin: .2rem ;
 	display: flex;
 	align-items:stretch;
 }
@@ -260,7 +267,7 @@
 	text-align: left;
 	background: rgba(0,0,0,.6);
 	color: #fff;
-	font-size: .48rem;
+	font-size: .6rem;
 }
 .page4 .mask .con .wrapper{
 	padding: .2rem 2rem .5rem;
@@ -276,10 +283,10 @@
 .page4 .mask .con .wrapper .item span{
 	display: inline-block;
 	margin-left: .2rem;
-	line-height: .56rem;
-	height: .56rem;
+	line-height: .6rem;
+	height: .64rem;
 	float: left;
-	font-size: .48rem;
+	font-size: .60rem;
 }
 .page4 .mask .con .wrapper .item span.icon{
 	font-size: 0;
@@ -322,7 +329,7 @@
 }
 .page5 .container{
 	position: relative;
-	margin: 2rem;
+	margin: 1.5rem;
 	height: 16rem;
 }
 .page5 .container .con{
@@ -347,6 +354,8 @@
 	text-align: center;
 	font-size: .56rem;
 	color: #fff;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 .page6 .container{
@@ -392,7 +401,7 @@
 	width: 4.1rem;
 }
 .page7 .container{
-	padding: 1rem;
+	padding: 3rem 1rem 1rem;
 	text-align: center;
 }
 .page7 .container .wrapper{
@@ -450,4 +459,10 @@
 	background: rgba(0,0,0,.5);
 	border-radius: .12rem;
 	margin-bottom: .5rem;
+}
+.page8 .container{
+	padding-top: 1rem;
+}
+.page8 .container .con .option{
+	padding: .22rem .5rem
 }

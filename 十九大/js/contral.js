@@ -213,7 +213,7 @@ new Vue({
 			score2:0,
 			score3:0
 		},{
-			name:'崇高理想联盟队',
+			name:'崇高理想联盟',
 			userId:'003',
 			sort:3,
 			score1:0,
