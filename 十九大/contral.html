@@ -28,7 +28,7 @@
 	    			<el-button type="primary" size="mini" v-for="(item,index) of list1" :disabled="item.disabled" @click.native="operation('必答题','显示题目',index)">{{item.text}}</el-button>
 	    		</div>
 	    		<div class="chose-con">
-	    			<el-button type="primary" size="mini" v-for="(item,index) of list1" :disabled="item.disabled" @click.native="operation('必答题','显示答案',index)">{{item.text}}(显示答案)</el-button>
+	    			<el-button type="hollow" size="mini" v-for="(item,index) of list1" :disabled="item.disabled" @click.native="operation('必答题','显示答案',index)">{{item.text}}(显示答案)</el-button>
 	    		</div>
 			  	<el-button type="success" @click.native="operation('必答题','显示规则')">显示规则1</el-button>
 			  	<el-button type="danger"  @click.native="operation('必答题','显示排名')">显示排名</el-button>

@@ -403,12 +403,17 @@ new Vue({
 		
 		//确认组别
 		contentScoket(){
+			console.log(GetQueryString('name'))
+			let groupNum = GetQueryString('name')
+			if(!groupNum){
+				alert("地址出错")
+				return false;
+			}
 			let that = this;
 			
-				localStorage.groupNum = this.groupCheckedName;
-				console.log(this.groupCheckedName)
+				localStorage.groupNum = groupNum;
 	        	that.$dialog.loading.open('等待连接...');
-	        	socket = new WebSocket("ws://118.25.2.174/SNGF.WXSuite/websocket/echoAnnotation/"+ this.groupCheckedName);
+	        	socket = new WebSocket("ws://118.25.2.174/SNGF.WXSuite/websocket/echoAnnotation/"+ groupNum);
 	        	//打开事件
 				socket.onopen = function() {
 					that.$dialog.loading.close();
@@ -703,3 +708,10 @@ new Vue({
 		this.contentScoket()
 	}
 })
+
+function GetQueryString(name) { 
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+	var r = window.location.search.substr(1).match(reg); 
+	if (r != null) return unescape(r[2]); 
+	return null;
+} 
